@@ -106,6 +106,12 @@ class Simulation(object):
 
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         while should_continue:
+            print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
+        pass
+        # TODO: for every iteration of this loop, call self.time_step() to compute another
+        # round of this simulation.
+        
+            # TODO: for every iteration of this loop, call self.time_step() to compute another
             # round of this simulation.
             self.time_step()
             log_time_step()
