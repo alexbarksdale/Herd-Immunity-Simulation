@@ -14,7 +14,6 @@ class Simulation(object):
     population that are vaccinated, the size of the population, and the amount of initially
     infected people in a population are all variables that can be set when the program is run.
     '''
-
     def __init__(self, pop_size, vacc_percentage, initial_infected=1, virus):
         ''' Logger object logger records all events during the simulation.
         Population represents all Persons in the population.
@@ -67,6 +66,21 @@ class Simulation(object):
                 list: A list of Person objects. (return variable name: population)
 
         '''
+        Person1 = Simulation(Person)
+        Person1.file_name
+
+        Person2 = Simulation(Person)
+        Person2.file_name
+
+        Person3 = Simulation(Person)
+        Person3.file_name
+
+        Person4 = Simulation(Person)
+        Person4.file_name
+
+        self.population = [Person1, Person2, Person3, Person4]
+        return self.population
+
         # TODO: Finish this method!  This method should be called when the simulation
         # begins, to create the population that will be used. This method should return
         # an array filled with Person objects that matches the specifications of the
@@ -105,19 +119,11 @@ class Simulation(object):
         should_continue = _simulation_should_continue()
 
         while should_continue:
-<<<<<<< HEAD
-            print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
-        pass
-        # TODO: for every iteration of this loop, call self.time_step() to compute another
-        # round of this simulation.
-        
-=======
             # TODO: for every iteration of this loop, call self.time_step() to compute another
             # round of this simulation.
             self.time_step()
             log_time_step()
         print(f'The simulation has ended after {time_step_counter} turns.')
->>>>>>> 7f0e7aaa99fc4a535eda18fd08a1ea8af6c39dd1
 
     def time_step(self):
         ''' This method should contain all the logic for computing one time step
