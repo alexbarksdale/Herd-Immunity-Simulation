@@ -84,8 +84,8 @@ class Simulation(object):
             Returns:
                 bool: True for simulation should continue, False if it should end.
         '''
-        # TODO: Complete this helper method.  Returns a Boolean.
-        if current_infected == 0:
+        # TODO: Complete this helper method. Returns a Boolean.
+        if self.current_infected == 0:
             return False
         else:
             return True
@@ -104,11 +104,12 @@ class Simulation(object):
         time_step_counter = 0
         should_continue = _simulation_should_continue()
 
+        # TODO: for every iteration of this loop, call self.time_step() to compute another
         while should_continue:
-            # TODO: for every iteration of this loop, call self.time_step() to compute another
             # round of this simulation.
             self.time_step()
             log_time_step()
+
         print(f'The simulation has ended after {time_step_counter} turns.')
 
     def time_step(self):
@@ -124,9 +125,16 @@ class Simulation(object):
                 increment interaction counter by 1.
             '''
         # TODO: Finish this method.
-        for i in total_infected:
-            # toal infected or current infected?
-            interaction(total_infected, population)
+
+        for person in population:
+            # Checks to see if the person is infected and alive
+            if person.is_alive == True and person.virus != None:
+                interaction_counter = 0
+                while interaction_counter != 100:
+                    random_person = choice(self.population)
+                    if random_person.is_alive == True:
+                        Simulation.interaction(person, random_person)
+                        interaction_counter += 1
 
         pass
 
