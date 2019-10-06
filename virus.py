@@ -14,3 +14,27 @@ def test_virus_instantiation():
     assert virus.name == "HIV"
     assert virus.repro_rate == 0.8
     assert virus.mortality_rate == 0.3
+    
+    ebola = Virus('ebola', .6, .5)
+    assert ebola.name == "ebola"
+    assert ebola.repro_rate == .6
+    assert ebola.mortality_rate == .5
+
+    Mumps = Virus('Mumps', .2, .7)
+    assert Mumps.name == "Mumps"
+    assert Mumps.repro_rate == .2
+    assert Mumps.mortality_rate == .7
+
+    HIV = Virus('HIV', .8, .8)
+    assert HIV.name == 'HIV'
+    assert HIV.repro_rate == .8
+    assert HIV.mortality_rate == .8
+
+    malaria = Virus('Malaria', .4, .2)
+    assert malaria.name == 'malaria'
+    assert malaria.repro_rate == .4
+    assert malaria.mortality_rate == .2
+
+
+
+    
