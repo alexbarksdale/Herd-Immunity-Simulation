@@ -14,7 +14,7 @@ class Simulation(object):
     population that are vaccinated, the size of the population, and the amount of initially
     infected people in a population are all variables that can be set when the program is run.
     '''
-    def __init__(self, pop_size, vacc_percentage, initial_infected=1, virus):
+    def __init__(self, pop_size, vacc_percentage, virus, initial_infected=1):
         ''' Logger object logger records all events during the simulation.
         Population represents all Persons in the population.
 
@@ -53,7 +53,7 @@ class Simulation(object):
         self.vacc_percentage = vacc_percentage  # float between 0 and 1
         self.total_dead = 0  # Int
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
-            virus_name, population_size, vacc_percentage, initial_infected)
+            virus_name, vacc_percentage, initial_infected, pop_size)
         self.newly_infected = []
 
     def _create_population(self, initial_infected):
@@ -77,15 +77,15 @@ class Simulation(object):
         population = []
         id = 0 
         # time to randomize the people getting vaccinated
-        for i in range(self.pop_size):
+        for _ in range(self.pop_size):
             num = random.random()
             vac_num = num < self.vacc_percentage
             person = Person(id, is_vaccinated=vac_num)
             population.append(person)
             id += 1
-            self.set_infected(population, initial_infected)
+        #set_infected(population, initial_infected)
         return population
-    
+
 
     def _simulation_should_continue(self):
         ''' The simulation should only end if the entire population is dead
@@ -95,7 +95,7 @@ class Simulation(object):
                 bool: True for simulation should continue, False if it should end.
         '''
         # TODO: Complete this helper method.  Returns a Boolean.
-        if current_infected == 0:
+        if self.current_infected == 0:
             return False
         else:
             return True
@@ -152,6 +152,11 @@ class Simulation(object):
         assert person.is_alive == True
         assert random_person.is_alive == True
 
+        random_num = random.uniform(0,1)
+        if randum_num < repro_rate:
+            newly_infected.append(random_person)
+
+
         # TODO: Finish this method.
         #  The possible cases you'll need to cover are listed below:
         # random_person is vaccinated:
@@ -164,7 +169,7 @@ class Simulation(object):
         #     Simulation object's newly_infected array, so that their .infected
         #     attribute can be changed to True at the end of the time step.
 
-        # TODO: Call slogger method during this method.
+        # TODO: Calls logger method during this method.
         pass
 
     def _infect_newly_infected(self):
@@ -179,7 +184,7 @@ class Simulation(object):
                     person.infection = self.virus 
         self.newly_infected = []
 
-        pass
+        
 
 
 if __name__ == "__main__":
