@@ -66,21 +66,6 @@ class Simulation(object):
                 list: A list of Person objects. (return variable name: population)
 
         '''
-        Person1 = Simulation(Person)
-        Person1.file_name
-
-        Person2 = Simulation(Person)
-        Person2.file_name
-
-        Person3 = Simulation(Person)
-        Person3.file_name
-
-        Person4 = Simulation(Person)
-        Person4.file_name
-
-        self.population = [Person1, Person2, Person3, Person4]
-        return self.population
-
         # TODO: Finish this method!  This method should be called when the simulation
         # begins, to create the population that will be used. This method should return
         # an array filled with Person objects that matches the specifications of the
@@ -89,7 +74,18 @@ class Simulation(object):
 
         # Use the attributes created in the init method to create a population that has
         # the correct intial vaccination percentage and initial infected.
-        pass
+        population = []
+        id = 0 
+        # time to randomize the people getting vaccinated
+        for i in range(self.pop_size):
+            num = random.random()
+            vac_num = num < self.vacc_percentage
+            person = Person(id, is_vaccinated=vac_num)
+            population.append(person)
+            id += 1
+            self.set_infected(population, initial_infected)
+        return population
+    
 
     def _simulation_should_continue(self):
         ''' The simulation should only end if the entire population is dead
