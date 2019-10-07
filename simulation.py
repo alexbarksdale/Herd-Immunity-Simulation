@@ -95,6 +95,7 @@ class Simulation(object):
                 bool: True for simulation should continue, False if it should end.
         '''
         # TODO: Complete this helper method.  Returns a Boolean.
+        # TODO: Complete this helper method. Returns a Boolean.
         if self.current_infected == 0:
             return False
         else:
@@ -114,11 +115,18 @@ class Simulation(object):
         time_step_counter = 0
         should_continue = _simulation_should_continue()
 
+        # TODO: for every iteration of this loop, call self.time_step() to compute another
         while should_continue:
+            print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
+        pass
+        # TODO: for every iteration of this loop, call self.time_step() to compute another
+        # round of this simulation.
+        
             # TODO: for every iteration of this loop, call self.time_step() to compute another
             # round of this simulation.
             self.time_step()
             log_time_step()
+
         print(f'The simulation has ended after {time_step_counter} turns.')
 
     def time_step(self):
@@ -137,7 +145,18 @@ class Simulation(object):
         for i in total_infected:
             # toal infected or current infected?
             interaction(total_infected, population)
-        pass
+
+        for person in population:
+            # Checks to see if the person is infected and alive
+            if person.is_alive == True and person.virus != None:
+                interaction_counter = 0
+                while interaction_counter != 100:
+                    random_person = choice(self.population)
+                    if random_person.is_alive == True:
+                        Simulation.interaction(person, random_person)
+                        interaction_counter += 1
+
+        
 
     def interaction(self, person, random_person):
         '''This method should be called any time two living people are selected for an
@@ -152,10 +171,15 @@ class Simulation(object):
         assert person.is_alive == True
         assert random_person.is_alive == True
 
-        random_num = random.uniform(0,1)
-        if randum_num < repro_rate:
-            newly_infected.append(random_person)
-
+        if random_person == is_vaccinated:
+            continue
+        if random_person == self.current_infected:
+            continue
+        
+        if random_person == self.is_alive and random_person != is_vaccinated:
+            random_num = random.uniform(0,1)
+            if randum_num < repro_rate:
+                newly_infected.append(random_person)
 
         # TODO: Finish this method.
         #  The possible cases you'll need to cover are listed below:
