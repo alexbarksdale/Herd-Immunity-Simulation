@@ -8,7 +8,7 @@ class Logger(object):
 
     def __init__(self, file_name):
         # TODO: Finish this initialization method. The file_name passed should be the full file name of the file that the logs will be written to.
-        self.file_name = None
+        self.file_name = file_name
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                        basic_repro_num):
@@ -23,7 +23,11 @@ class Logger(object):
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
 
-        with open('logfile.txt', 'w') as log_textfile:
+        '''
+        WITH allows you to open the file and automatically close the file without the close() method.
+        It is the same as log_textfile = open('logfile.txt', 'w') then having to log_textfile.close() at the end.
+        '''
+        with open(self.file_name, 'w') as log_textfile:
             log_content = [pop_size, vacc_percentage,
                            virus_name, mortality_rate, basic_repro_num]
 
