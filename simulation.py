@@ -96,6 +96,11 @@ class Simulation(object):
         '''
         # TODO: Complete this helper method.  Returns a Boolean.
         # TODO: Complete this helper method. Returns a Boolean.
+        '''if len(self.pop_size) or vacc_percentage == 1:
+            return True
+        else:
+            return False
+        '''
         if self.current_infected == 0:
             return False
         else:
@@ -118,12 +123,7 @@ class Simulation(object):
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         while should_continue:
             print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
-        pass
-        # TODO: for every iteration of this loop, call self.time_step() to compute another
-        # round of this simulation.
-        
-            # TODO: for every iteration of this loop, call self.time_step() to compute another
-            # round of this simulation.
+
             self.time_step()
             log_time_step()
 
@@ -171,12 +171,12 @@ class Simulation(object):
         assert person.is_alive == True
         assert random_person.is_alive == True
 
-        if random_person == is_vaccinated:
-            continue
+        if random_person == self.is_vaccinated:
+            pass
         if random_person == self.current_infected:
-            continue
+            pass
         
-        if random_person == self.is_alive and random_person != is_vaccinated:
+        if random_person == random_person.is_alive and random_person != self.is_vaccinated:
             random_num = random.uniform(0,1)
             if randum_num < repro_rate:
                 newly_infected.append(random_person)
