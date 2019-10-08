@@ -7,7 +7,7 @@ class Logger(object):
     # test them one by one as you write your class.
 
     def __init__(self, file_name):
-        # TODO: Finish this initialization method. The file_name passed should be the full file name of the file that the logs will be written to.
+        # DONE: Finish this initialization method. The file_name passed should be the full file name of the file that the logs will be written to.
         self.file_name = file_name
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
@@ -16,7 +16,7 @@ class Logger(object):
         The simulation class should use this method immediately to log the specific
         parameters of the simulation as the first line of the file.
         '''
-        # TODO: Finish this method. This line of metadata should be tab-delimited
+        # DONE: Finish this method. This line of metadata should be tab-delimited
         # it should create the text file that we will store all logs in.
         # TIP: Use 'w' mode when you open the file. For all other methods, use
         # the 'a' mode to append a new log to the end, since 'w' overwrites the file.
@@ -26,6 +26,8 @@ class Logger(object):
         '''
         WITH allows you to open the file and automatically close the file without the close() method.
         It is the same as log_textfile = open('logfile.txt', 'w') then having to log_textfile.close() at the end.
+        
+        .writelines expects an iterable of strings from a list (log_content) and .write expects a single string
         '''
         with open(self.file_name, 'w') as log_textfile:
             log_content = [pop_size, vacc_percentage,
@@ -34,8 +36,8 @@ class Logger(object):
             for i in log_content:
                 # TODO: Test if this works
                 log_content.append(i, end=' \n')
+                log_textfile.writelines(log_content)
 
-            log_textfile.writelines(log_content)
         pass
 
     def log_interaction(self, person, random_person, random_person_sick=None,
@@ -59,14 +61,14 @@ class Logger(object):
         ''' The Simulation object uses this method to log the results of every
         call of a Person object's .resolve_infection() method.
         '''
-        # Finish this method. If the person survives, did_die_from_infection should be False. Otherwise, did_die_from_infection should be True.
-        if person.did_die_from_infection() == False:
-            print(f'{person.ID} survived infection.\n')
-            # TODO: Append the result of the infection to the logfile
+        # DONE: Finish this method. If the person survives, did_die_from_infection should be False. Otherwise, did_die_from_infection should be True.
 
-        else:
-            print(f'{person.ID} died from infection\n')
-            # TODO: Append the result of the infection to the logfile
+        with open(self.file_name, 'a') as log_textfile:
+            #! Is did_die_from_infection supposed to be did_survive_infection? TODO: Fix later after confirmed.
+            if person.did_die_from_infection() == False:
+                log_textfile.write(f'{person.ID} survived infection.\n')
+            else:
+                log_textfile.write(f'{person.ID} died from infection\n')
 
     def log_time_step(self, time_step_number):
         ''' STRETCH CHALLENGE DETAILS:
