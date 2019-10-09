@@ -16,7 +16,7 @@ class Simulation(object):
     '''
     #def __init__(self, pop_size, vacc_percentage, virus, initial_infected=1):
     
-    def __init__(self, pop_size, vacc_percentage, initial_infected=1, virus=None):
+    def __init__(self, pop_size, vacc_percentage, virus=None, initial_infected=1):
         ''' Logger object logger records all events during the simulation.
         Population represents all Persons in the population.
 
@@ -44,7 +44,7 @@ class Simulation(object):
         # TODO: Store each newly infected person's ID in newly_infected attribute.
         # At the end of each time step, call self._infect_newly_infected()
         # and then reset .newly_infected back to an empty list.
-        self.logger = None
+        self.logger = Logger(self.file_name)
         self.population = []  # List of Person objects
         self.pop_size = pop_size  # Int
         self.next_person_id = 0  # Int
@@ -57,6 +57,8 @@ class Simulation(object):
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
             virus_name, vacc_percentage, initial_infected, pop_size)
         self.newly_infected = []
+        self.population = self._create_population()
+        self.logger.write_metadata(self.popsize)
 
     def _create_population(self, initial_infected):
         '''This method will create the initial population.
@@ -96,7 +98,6 @@ class Simulation(object):
             Returns:
                 bool: True for simulation should continue, False if it should end.
         '''
-        # TODO: Complete this helper method.  Returns a Boolean.
         # TODO: Complete this helper method. Returns a Boolean.
         '''if len(self.pop_size) or vacc_percentage == 1:
             return True
