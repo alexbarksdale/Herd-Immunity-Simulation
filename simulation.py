@@ -58,7 +58,7 @@ class Simulation(object):
             virus_name, vacc_percentage, initial_infected, pop_size)
         self.newly_infected = []
         self.population = self._create_population()
-        self.logger.write_metadata(self.popsize)
+        self.logger.write_metadata(self.pop_size, self.vacc_percentage, self.virus.name, self.virus.mortality_rate, self.virus.repro_rate)
 
     def _create_population(self, initial_infected):
         '''This method will create the initial population.
@@ -78,17 +78,12 @@ class Simulation(object):
 
         # Use the attributes created in the init method to create a population that has
         # the correct intial vaccination percentage and initial infected.
-        population = []
-        id = 0
+        alive_sick = []
         # time to randomize the people getting vaccinated
-        for _ in range(self.pop_size):
-            num = random.random()
-            vac_num = num < self.vacc_percentage
-            person = Person(id, is_vaccinated=vac_num)
-            population.append(person)
-            id += 1
-        #set_infected(population, initial_infected)
-        return population
+        for person in self.population:
+            if person.infected and person.is_alive:
+                alive_sick.append(person)
+        return alive_sick
 
 
     def _simulation_should_continue(self):
