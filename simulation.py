@@ -95,6 +95,7 @@ class Simulation(object):
                 bool: True for simulation should continue, False if it should end.
         '''
         # TODO: Complete this helper method. Returns a Boolean.
+        # TODO: Not sure if this works - Alex
         if self.current_infected == 0:
             return False
         else:

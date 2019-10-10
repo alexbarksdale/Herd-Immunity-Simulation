@@ -38,8 +38,6 @@ class Logger(object):
                 log_content.append(i, end=' \n')
                 log_textfile.writelines(log_content)
 
-        pass
-
     def log_interaction(self, person, random_person, random_person_sick=None,
                         random_person_vacc=None, did_infect=None):
         '''
@@ -55,7 +53,18 @@ class Logger(object):
         # represent all the possible edge cases. Use the values passed along with each person,
         # along with whether they are sick or vaccinated when they interact to determine
         # exactly what happened in the interaction and create a String, and write to your logfile.
-        pass
+
+        with open(self.file_name, 'a') as log_textfile:
+            if did_infect and not random_person_vacc and not random_person_sick:
+                log_textfile.write(
+                    f'{random_person._id} got infected by {person._id}.')
+            elif not did_infect:
+                if random_person_sick:
+                    log_textfile.write(
+                        f'{random_person._id} and {person._id} were already sick, can\'t infect the already infected!')
+                elif random_person_vacc:
+                    log_textfile.write(
+                        f'{random_person._id} couldn\'t infect {person._id} because they are vaccinated!')
 
     def log_infection_survival(self, person, did_die_from_infection):
         ''' The Simulation object uses this method to log the results of every
@@ -64,13 +73,13 @@ class Logger(object):
         # DONE: Finish this method. If the person survives, did_die_from_infection should be False. Otherwise, did_die_from_infection should be True.
 
         with open(self.file_name, 'a') as log_textfile:
-            #! Is did_die_from_infection supposed to be did_survive_infection? TODO: Fix later after confirmed.
             if person.did_die_from_infection() == False:
                 log_textfile.write(f'{person.ID} survived infection.\n')
             else:
                 log_textfile.write(f'{person.ID} died from infection\n')
 
-    def log_time_step(self, time_step_number):
+    def log_time_step(self, time_step_number, infected_this_step,
+                      died_this_time, cur_infected, total_dead):
         ''' STRETCH CHALLENGE DETAILS:
 
         If you choose to extend this method, the format of the summary statistics logged
@@ -87,4 +96,12 @@ class Logger(object):
         '''
         # TODO: Finish this method. This method should log when a time step ends, and a new one begins.
         # NOTE: Here is an opportunity for a stretch challenge!
-        pass
+        with open(self.file_name, 'a') as log_textfile:
+            stats = f'{infected_this_step} people were infected during TIME STEP {time_step_number}.\n' + f'{died_this_time} people died during TIME STEP {time_step_number}.\n' + \
+                f'{cur_infected} people are currently infected.\n {total_dead} people died in total by far.\n' + \
+                    f'TIME STEP {time_step_number} ended, beginning TIME STEP {time_step_number + 1}.'
+
+            divider = '-' * 20
+            log_textfile.write(divider)
+            log_textfile.write(stats)
+            log_textfile.write(divider)
