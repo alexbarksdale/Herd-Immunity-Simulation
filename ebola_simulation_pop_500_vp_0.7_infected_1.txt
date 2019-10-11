@@ -1,0 +1,9 @@
+Population size: 500	Vaccination percentage: 0.7	Virus name: ebola	Mortality rate: 0.3	Basic reproduction number: 0.2
+- - - - - - - - - - - - - - - - - - - - - 
+0 people were infected during TIME STEP 3.
+0 people died during TIME STEP 3.
+1 people are currently infected.
+0 people died in total by far.
+TIME STEP 3 ended, beginning TIME STEP 4.
+- - - - - - - - - - - - - - - - - - - - - 
+
