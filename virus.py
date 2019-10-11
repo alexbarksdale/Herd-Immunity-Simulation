@@ -13,9 +13,9 @@ class Virus(object):
 
 
 class TestVirus(unittest.TestCase):
+    '''Check to make sure that the virus instantiator is working.'''
+
     def test_virus_instantiation(self):
-        # TODO: Create your own test that models the virus you are working with
-        '''Check to make sure that the virus instantiator is working.'''
         virus = Virus("HIV", 0.8, 0.3)
         assert virus.name == "HIV"
         assert virus.repro_rate == 0.8
@@ -41,12 +41,13 @@ class TestVirus(unittest.TestCase):
         assert malaria.repro_rate == .4
         assert malaria.mortality_rate == .2
 
+    '''
+    Credit to
+    https://stackoverflow.com/questions/88325/how-do-i-unit-test-an-init-method-of-a-python-class-with-assertraises
+    for inspiring this test.
+    '''
+
     def test_insufficient_args(self):
-        '''
-        Credit to
-        https://stackoverflow.com/questions/88325/how-do-i-unit-test-an-init-method-of-a-python-class-with-assertraises
-        for inspiring this test.
-        '''
         name = "HIV"
         repro_rate = 1.2
         mortality_rate = 2.9
