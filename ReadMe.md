@@ -45,3 +45,7 @@ python3  simulation.py (POPULATION SIZE) (VACC PERCENTAGE) (VIRUS NAME) (INITIAL
 
 The example input would be: <br>
  `python3 simulation.py 100000 0.90 Ebola 0.70 0.25 10` in the terminal.
+ 
+ ## Acknowledgments
+
+* Used Make School's starter code to get started: [Make School's Repo](https://github.com/Make-School-Labs/Herd-Immunity-Simulation)
