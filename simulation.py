@@ -17,6 +17,7 @@ class Simulation(object):
         infected people in a population are all variables that can be set when
         the program is run.
     '''
+
     def __init__(self, pop_size, vacc_percentage, virus, initial_infected=1):
         ''' Logger object logger records all events during the simulation.
         Population represents all Persons in the population.
@@ -51,8 +52,8 @@ class Simulation(object):
         self.vacc_percentage = vacc_percentage  # float between 0 and 1
         self.total_dead = 0  # Int
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
-                        self.virus.name, self.pop_size, self.vacc_percentage,
-                        self.initial_infected)
+            self.virus.name, self.pop_size, self.vacc_percentage,
+            self.initial_infected)
         self.logger = Logger(self.file_name)
         self.newly_infected = []
         self.population = self._create_population()
@@ -152,7 +153,7 @@ class Simulation(object):
     def run(self):
         ''' This method should run the simulation until all requirements for
             ending the simulation are met.
-            
+
         '''
         time_step_counter = 3
         simulation_should_continue = 0
