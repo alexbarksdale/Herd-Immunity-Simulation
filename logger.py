@@ -26,17 +26,14 @@ class Logger(object):
         '''
         WITH allows you to open the file and automatically close the file without the close() method.
         It is the same as log_textfile = open('logfile.txt', 'w') then having to log_textfile.close() at the end.
-        
+
         .writelines expects an iterable of strings from a list (log_content) and .write expects a single string
         '''
         with open(self.file_name, 'w') as log_textfile:
-            log_content = [pop_size, vacc_percentage,
-                           virus_name, mortality_rate, basic_repro_num]
-
-            for i in log_content:
-                # TODO: Test if this works
-                log_content.append(i, end=' \n')
-                log_textfile.writelines(log_content)
+            log_textfile.write(f"Population size: {pop_size}\tVaccination percentage: " +
+                               f"{vacc_percentage}\tVirus name: {virus_name}\t" +
+                               f"Mortality rate: {mortality_rate}\t" +
+                               f"Basic reproduction number: {basic_repro_num}\n")
 
     def log_interaction(self, person, random_person, random_person_sick=None,
                         random_person_vacc=None, did_infect=None):
@@ -101,7 +98,7 @@ class Logger(object):
                 f'{cur_infected} people are currently infected.\n {total_dead} people died in total by far.\n' + \
                     f'TIME STEP {time_step_number} ended, beginning TIME STEP {time_step_number + 1}.'
 
-            divider = '-' * 20
-            log_textfile.write(divider)
+            divider = '-' * 40
+            log_textfile.write(divider + '\n')
             log_textfile.write(stats)
-            log_textfile.write(divider)
+            log_textfile.write('\n' + divider)
