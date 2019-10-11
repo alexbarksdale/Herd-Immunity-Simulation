@@ -1,0 +1,20 @@
+Andre Williams
+Alex Barksdale
+
+1. What were the inputs you gave the simulation? (Population size, percent vaccinated, virus name, mortality rate, reproductive rate)
+
+The population size was 500, vaccinated percentage was .7, the virus was ebola, mortality rate was .3, and the reproductive rate was .2
+
+2. What percentage of the population became infected at some point before the virus burned out?
+
+30 percent of the population burned out.
+
+3. What percentage of the population died from the virus?
+
+13 percent of people died 
+
+4. Out of all interactions sick individuals had during the entire simulation, 
+how many total interactions did we see where a vaccination saved a person from potentially becoming infected?
+
+435 people were saved from dying. 350 people were vaccinated at the beginning of the population. The total amount of vaccinated people was 435
+at the end of the simulation. That means it took 85 interactions to save the extra 85 people.
