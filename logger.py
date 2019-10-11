@@ -26,7 +26,6 @@ class Logger(object):
         '''
         WITH allows you to open the file and automatically close the file without the close() method.
         It is the same as log_textfile = open('logfile.txt', 'w') then having to log_textfile.close() at the end.
-
         .writelines expects an iterable of strings from a list (log_content) and .write expects a single string
         '''
         with open(self.file_name, 'w') as log_textfile:
@@ -40,9 +39,7 @@ class Logger(object):
         '''
         The Simulation object should use this method to log every interaction
         a sick person has during each time step.
-
         The format of the log should be: "{person.ID} infects {random_person.ID} \n"
-
         or the other edge cases:
             "{person.ID} didn't infect {random_person.ID} because {'vaccinated' or 'already sick'} \n"
         '''
@@ -54,14 +51,14 @@ class Logger(object):
         with open(self.file_name, 'a') as log_textfile:
             if did_infect and not random_person_vacc and not random_person_sick:
                 log_textfile.write(
-                    f'{random_person._id} got infected by {person._id}.')
+                    f'{random_person._id} got infected by {person._id}.\n')
             elif not did_infect:
                 if random_person_sick:
                     log_textfile.write(
-                        f'{random_person._id} and {person._id} were already sick, can\'t infect the already infected!')
+                        f'{random_person._id} and {person._id} were already sick, can\'t infect the already infected!\n')
                 elif random_person_vacc:
                     log_textfile.write(
-                        f'{random_person._id} couldn\'t infect {person._id} because they are vaccinated!')
+                        f'{random_person._id} couldn\'t infect {person._id} because they are vaccinated!\n')
 
     def log_infection_survival(self, person, did_die_from_infection):
         ''' The Simulation object uses this method to log the results of every
@@ -70,24 +67,21 @@ class Logger(object):
         # DONE: Finish this method. If the person survives, did_die_from_infection should be False. Otherwise, did_die_from_infection should be True.
 
         with open(self.file_name, 'a') as log_textfile:
-            if person.did_die_from_infection() == False:
-                log_textfile.write(f'{person.ID} survived infection.\n')
-            else:
-                log_textfile.write(f'{person.ID} died from infection\n')
+            if did_die_from_infection:
+                log_textfile.write(f"{person._id} died from infection.\n")
+            elif not did_die_from_infection:
+                log_textfile.write(f"{person._id} survived infection.\n")
 
     def log_time_step(self, time_step_number, infected_this_step,
                       died_this_time, cur_infected, total_dead):
         ''' STRETCH CHALLENGE DETAILS:
-
         If you choose to extend this method, the format of the summary statistics logged
         are up to you.
-
         At minimum, it should contain:
             The number of people that were infected during this specific time step.
             The number of people that died on this specific time step.
             The total number of people infected in the population, including the newly infected
             The total number of dead, including those that died during this time step.
-
         The format of this log should be:
             "Time step {time_step_number} ended, beginning {time_step_number + 1}\n"
         '''

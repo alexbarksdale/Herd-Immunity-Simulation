@@ -94,7 +94,9 @@ class Simulation(object):
                 population: A list of Person objects.
         '''
         population = list()
-        total = random.sample(range(self.pop_size), self.initial_infected)
+        number_vaccinated = round(self.vacc_percentage * self.pop_size)
+        total = random.sample(range(self.pop_size), number_vaccinated +
+                              self.initial_infected)
         indices_infected = self.random_infected(total)
         indices_vaccinated = total
         self.total_infected += self.initial_infected
