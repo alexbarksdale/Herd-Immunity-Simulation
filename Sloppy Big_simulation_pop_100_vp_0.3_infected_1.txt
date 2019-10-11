@@ -1,1 +1,0 @@
-Population size: 100	Vaccination percentage: 0.3	Virus name: Sloppy Big	Mortality rate: 0.24	Basic reproduction number: 0.15

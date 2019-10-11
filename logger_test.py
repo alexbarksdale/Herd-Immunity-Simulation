@@ -40,6 +40,4 @@ def test_write_metadata():
     with open('test.txt', 'r') as text_log:
         test = text_log.read()
         assert test == 'Population size: 50	Vaccination percentage: 0.3	Virus name: Ebola	Mortality rate: 0.3	Basic reproduction number: 0.3\n'
-
-
-os.remove('test.txt')
+    os.remove('test.txt')
